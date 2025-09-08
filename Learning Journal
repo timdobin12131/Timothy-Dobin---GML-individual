@@ -1,0 +1,11 @@
+Tutorial #1: https://youtu.be/1J5EydrnIPs?si=KSaNy4PDz00aNyL9
+- In this tutorial, I learned the initial basics of starting an rpg game. Starting from scratch without any previous knowledge, the main issue I faced was simply understanding what buttons did what and how to create the
+  different aspects of a game. However, following along with the tutorial helped me get a good basic understanding.
+
+Tutorial #2: https://www.youtube.com/watch?v=xr0mqIy6DAU&list=PLhIbBGhnxj5Ier75j1M9jj5xrtAaaL1_4&index=2
+- In this tutorial, I learned how to design basic real time combat, adding a slash animation as well as attacks that collide with enemies in order to do damage to them. Understanding exactly how the code worked with the 
+  different variables and functions proved to be a little challenging, but I was able to look at the code and decipher it.
+
+Tutorial #3: https://www.youtube.com/watch?v=HqmQAoPdZ2U&list=PLhIbBGhnxj5Ier75j1M9jj5xrtAaaL1_4&index=4
+- In this tutorial, I learned how to implement a leveling and xp system in the game, which was a little complicated. Specifically, the order of functions and lines of code was a bit confusing to me. I have not fully completed
+this tutorial yet however, as I still need to make the enemies grant the player xp.
