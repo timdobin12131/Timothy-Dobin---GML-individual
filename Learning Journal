@@ -9,3 +9,6 @@ Tutorial #2: https://www.youtube.com/watch?v=xr0mqIy6DAU&list=PLhIbBGhnxj5Ier75j
 Tutorial #3: https://www.youtube.com/watch?v=HqmQAoPdZ2U&list=PLhIbBGhnxj5Ier75j1M9jj5xrtAaaL1_4&index=4
 - In this tutorial, I learned how to implement a leveling and xp system in the game, which was a little complicated. Specifically, the order of functions and lines of code was a bit confusing to me. I have not fully completed
 this tutorial yet however, as I still need to make the enemies grant the player xp.
+
+9/12/25 - Today I faced a challenge with my dialogue in which whenever I interacted with an npc to talk to them the code would fail to read the color from the dialogue script. Putting the code into chatGPT, I was able to work 
+          around this by adding more checks to make sure the color doesn't come through as undefined, and the dialogue ended up working successfully as planned.
