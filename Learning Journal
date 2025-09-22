@@ -13,5 +13,5 @@ this tutorial yet however, as I still need to make the enemies grant the player 
 9/12/25 - Today I faced a challenge with my dialogue in which whenever I interacted with an npc to talk to them the code would fail to read the color from the dialogue script. Putting the code into chatGPT, I was able to work 
           around this by adding more checks to make sure the color doesn't come through as undefined, and the dialogue ended up working successfully as planned.
 
-Week of Sep. 15-19 - Throughout the week I worked on designing pickups for the character that boost damage and defense. Using sprites I found online, I successfully made the pickups as demonstrated in 11-22-15.mp4. After this, 
-                     I collaborated with jonathan to program projectiles that shoot at the player, and added the projectiles to boss's skillset.
+Week of Sep. 15-19 - Throughout the week I worked on designing pickups for the character that boost damage and defense. Using sprites I found online, I successfully made the pickups. After this, 
+                     I collaborated with jonathan to program projectiles that shoot at the player, and added the projectiles to boss's skillset. This progress can be seen documented in the attached screen recording.
