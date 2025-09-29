@@ -15,3 +15,8 @@ this tutorial yet however, as I still need to make the enemies grant the player 
 
 Week of Sep. 15-19 - Throughout the week I worked on designing pickups for the character that boost damage and defense. Using sprites I found online, I successfully made the pickups. After this, 
                      I collaborated with jonathan to program projectiles that shoot at the player, and added the projectiles to boss's skillset. This progress can be seen documented in the attached screen recording.
+
+9/23/25 - I began work on a player controlled projectile, and drafted ideas in order to allow the projectile to travel where the player is facing.
+9/24/25 - I coded a projectile, however faced errors as the projectile would not go in the direction I wanted it to go. Spent the rest of the time debugging.
+9/25/25 - Worked with Jonathan and Jacob to come up with a way to use switch cases in order to solve the issue
+9/26/25 - Finished projectile system and now began work on it's speed and damage upon enemy collision.
