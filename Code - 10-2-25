@@ -2,11 +2,233 @@ Project: gaming rpg epicity
 
 ---
 
+Folder: objects\energy_projectile
+File: Alarm_0.gml
+Modified: 2025-09-24
+
+event_inherited();
+
+---
+
+Folder: objects\energy_projectile
+File: Create_0.gml
+Modified: 2025-09-24
+
+event_inherited();
+
+---
+
+Folder: objects\energy_projectile
+File: Step_0.gml
+Modified: 2025-09-24
+
+event_inherited();
+
+
+---
+
+Folder: objects\jacob_thomas_lopez
+File: Alarm_0.gml
+Modified: 2025-09-24
+
+// Inherit the parent event
+
+if (instance_exists(obj_player) && distance_to_object(obj_player) < distance_to_player) {
+	target_x = obj_player.x;
+	target_y = obj_player.y;
+}
+else {
+	target_x = random_range(xstart - 100, xstart + 100);
+	target_y = random_range(ystart - 100, ystart + 100);
+}
+
+alarm[0] = 60;
+
+
+
+
+---
+
+Folder: objects\jacob_thomas_lopez
+File: Alarm_1.gml
+Modified: 2025-09-24
+
+// Inherit the parent event
+
+event_inherited();
+
+
+
+---
+
+Folder: objects\jacob_thomas_lopez
+File: Alarm_2.gml
+Modified: 2025-09-24
+
+shot = false;
+
+---
+
+Folder: objects\jacob_thomas_lopez
+File: Collision_obj_attack.gml
+Modified: 2025-09-24
+
+// Inherit the parent event
+event_inherited();
+
+
+
+---
+
+Folder: objects\jacob_thomas_lopez
+File: Create_0.gml
+Modified: 2025-09-24
+
+// Inherit the parent event
+event_inherited();
+
+shot = false;
+
+---
+
+Folder: objects\jacob_thomas_lopez
+File: Draw_64.gml
+Modified: 2025-09-24
+
+draw_text(0,20,alarm[2]);
+
+---
+
+Folder: objects\jacob_thomas_lopez
+File: Step_0.gml
+Modified: 2025-09-24
+
+// Inherit the parent event
+event_inherited();
+
+if (alarm[1] >= 0) {
+    target_x = x + kb_x;
+    target_y = y + kb_y;
+}
+
+var _hor = clamp(target_x - x, -1, 1);
+var _ver = clamp(target_y - y, -1, 1);
+
+move_and_collide(_hor * move_speed, _ver * move_speed, [tilemap, energy_projectile]);
+if(instance_exists(obj_player) and distance_to_object(obj_player)<distance_to_player and !shot and alarm[2] <=0){
+    instance_create_depth(x,y,depth,energy_projectile);
+    alarm[2] = 60;
+    shot = true;
+}
+
+---
+
+Folder: objects\Laser
+File: Collision_obj_enemy_parent.gml
+Modified: 2025-09-30
+
+
+
+---
+
+Folder: objects\Laser
+File: Create_0.gml
+Modified: 2025-09-30
+
+image_angle = obj_player.facing;
+angle = obj_player.facing
+xspd = 0;
+yspd = 0;
+projDamage = 1;
+
+
+---
+
+Folder: objects\Laser
+File: Step_0.gml
+Modified: 2025-09-29
+
+switch (angle){
+    case 0:
+        xspd=5
+        break;
+    case 45:
+        xspd=5
+        yspd=-5
+        break;
+    case 90:
+        yspd=-5
+        break;
+    case 135:
+        xspd=-5
+        yspd=-5
+        break;
+    case 180:
+        xspd=-5
+        break;
+    case 225:
+        xspd=-5
+        yspd=5
+        break;
+    case 270:
+        yspd=5
+        break;
+    case 315:
+        yspd=5
+        xspd=5
+        break;
+}
+move_and_collide(xspd,yspd, layer_tilemap_get_id("Tiles_Col"))
+
+if (place_meeting(x+xspd,y+yspd,layer_tilemap_get_id("Tiles_Col")))
+    instance_destroy()
+
+// add enemy collisions 
+
+---
+
+Folder: objects\laser_pickup
+File: Collision_obj_player.gml
+Modified: 2025-10-01
+
+global.projType = "laser";
+instance_destroy();
+
+---
+
+Folder: objects\Object10
+File: Collision_obj_player.gml
+Modified: 2025-09-15
+
+global.swordType = "Lightning";
+instance_destroy();
+
+---
+
+Folder: objects\Object11
+File: Collision_obj_player.gml
+Modified: 2025-09-17
+
+global.armorType = "Blue";
+instance_destroy();
+
+---
+
 Folder: objects\obj_attack
 File: Create_0.gml
-Modified: 2025-08-28
+Modified: 2025-09-24
 
-damage = 1;
+switch global.swordType{
+    case "Wood":
+        damage = 1;
+        sprite_index = spr_slash_1;
+        break;
+    case "Lightning":
+        damage = 2;
+        sprite_index = spr_slash_2;
+        break;
+}
+
 
 
 ---
@@ -21,7 +243,7 @@ instance_destroy();
 
 Folder: objects\obj_dialogue
 File: Create_0.gml
-Modified: 2025-09-10
+Modified: 2025-09-24
 
 messages = [];
 current_message = -1;
@@ -29,7 +251,7 @@ current_char = 0;
 draw_message = "";
 
 char_speed = 0.5;
-input_key = vk_space;
+input_key = vk_up;
 
 gui_w = display_get_gui_width();
 gui_h = display_get_gui_height();
@@ -141,6 +363,21 @@ if (hp <= 0) {
 ---
 
 Folder: objects\obj_enemy_parent
+File: Collision_Laser.gml
+Modified: 2025-09-30
+
+if (alarm[1] < 0) {
+    hp -= other.projDamage;
+    image_blend = c_red;
+    
+    kb_x = sign(x-other.x);
+    kb_y = sign(y-other.y);
+    alarm[1] = 20;
+}
+
+---
+
+Folder: objects\obj_enemy_parent
 File: Collision_obj_attack.gml
 Modified: 2025-08-29
 
@@ -201,9 +438,9 @@ move_and_collide(_hor * move_speed, _ver * move_speed, [tilemap, obj_enemy_paren
 
 Folder: objects\obj_npc_parent
 File: Create_0.gml
-Modified: 2025-09-11
+Modified: 2025-09-24
 
-input_key = vk_space;
+input_key = vk_up;
 can_talk = false;
 
 
@@ -258,11 +495,48 @@ image_blend = c_white;
 ---
 
 Folder: objects\obj_player
-File: Collision_obj_enemy_parent.gml
-Modified: 2025-08-29
+File: Collision_energy_projectile.gml
+Modified: 2025-09-19
 
-if (alarm[0] < 0) {
-    hp -= other.damage;
+if (alarm[0] < 0 and other.damage - defense <= 0) {
+    hp -= 1;
+    alarm[0] = 60;
+    image_blend = c_red;
+    
+    if (hp<= 0) {
+        room_restart();
+        hp = hp_total;
+    }
+}
+else if (alarm[0] < 0) {
+    hp -= other.damage - defense;
+    alarm[0] = 60;
+    image_blend = c_red;
+    
+    if (hp<= 0) {
+        room_restart();
+        hp = hp_total;
+    }
+}
+
+---
+
+Folder: objects\obj_player
+File: Collision_obj_enemy_parent.gml
+Modified: 2025-09-17
+
+if (alarm[0] < 0 and other.damage - defense <= 0) {
+    hp -= 1;
+    alarm[0] = 60;
+    image_blend = c_red;
+    
+    if (hp<= 0) {
+        room_restart();
+        hp = hp_total;
+    }
+}
+else if (alarm[0] < 0) {
+    hp -= other.damage - defense;
     alarm[0] = 60;
     image_blend = c_red;
     
@@ -278,7 +552,8 @@ if (alarm[0] < 0) {
 
 Folder: objects\obj_player
 File: Create_0.gml
-Modified: 2025-09-12
+Modified: 2025-10-02
+
 
 
 move_speed = 1.2;
@@ -289,6 +564,10 @@ hp = 10;
 hp_total = hp;
 damage = 1;
 facing = 0;
+moving = false;
+defense = 0;
+projTargetX = 1;
+projTargetY = 0;
 
 level = 1;
 xp = 0;
@@ -312,6 +591,12 @@ function add_xp(_xp_to_add) {
     }
 }
 
+_hor = 0;
+_ver = 0;
+
+global.swordType = "Wood";
+global.armorType = "none";
+global.projType = "none";
 
 
 
@@ -319,7 +604,7 @@ function add_xp(_xp_to_add) {
 
 Folder: objects\obj_player
 File: Draw_64.gml
-Modified: 2025-09-04
+Modified: 2025-09-26
 
 var _dx = 16;
 var _dy = 16;
@@ -329,6 +614,8 @@ var _barh = 32;
 draw_set_font(Font1);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
+
+draw_text(200, 10, facing)
 
 var _health_barw = _barw * (hp/hp_total);
 
@@ -354,40 +641,46 @@ draw_sprite_stretched_ext(spr_box, 1, _dx, _dy, _stamina_barw, _barh, c_green, 0
 
 draw_text(_dx + _barw / 2, _dy + _barh / 2, "STAMINA");
 
+draw_text(10,10,defense);
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
+
+
 
 ---
 
 Folder: objects\obj_player
 File: Step_0.gml
-Modified: 2025-09-12
+Modified: 2025-10-02
 
-if (instance_exists(obj_dialogue)) exit;
 
-if (keyboard_check_pressed(vk_space)) 
-{
-    create_dialogue([
-{
-        name: "test dialogue",
-        msg: "dfortnite",
-}    
-    ])
+switch global.armorType{
+    case "None":
+        defense = 0;
+        break;
+    case "Blue":
+        defense = 2;
+        break;
 }
 
-var _hor = keyboard_check(ord("D")) - keyboard_check(ord("A"));
-var _ver = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 
-move_and_collide(_hor * move_speed, _ver * move_speed, tilemap, undefined, undefined, undefined, move_speed, move_speed)
+
+_hor = keyboard_check(ord("D")) - keyboard_check(ord("A"));
+_ver = keyboard_check(ord("S")) - keyboard_check(ord("W"));
+
+
+
+move_and_collide(_hor * move_speed, _ver * move_speed, [tilemap,obj_wall], undefined, undefined, undefined, move_speed, move_speed)
 if (_hor != 0 or _ver != 0){
-	if (_ver > 0) sprite_index = spr_player_walk_down;
+	moving = true;
+    if (_ver > 0) sprite_index = spr_player_walk_down;
 	else if (_ver < 0) sprite_index = spr_player_walk_up;
 	else if (_hor > 0) sprite_index = spr_player_walk_right;
 	else if (_hor < 0) sprite_index = spr_player_walk_left;
         
     facing = point_direction(0, 0, _hor, _ver);
-}
+}    
 else {
 	if (sprite_index == spr_player_walk_right) sprite_index = spr_player_idle_right;
 	else if (sprite_index == spr_player_walk_left) sprite_index = spr_player_idle_left;
@@ -414,6 +707,13 @@ if (stamina < stamina_total) {
     stamina += stamina_rate;
 }
 
+switch(facing){
+    case 45:
+        
+}
+if (keyboard_check_pressed(vk_alt) and global.projType = "laser") {
+    instance_create_depth(x,y,depth,Laser)
+}
 
 
 
@@ -429,42 +729,9 @@ with (all){
 
 ---
 
-Folder: objects\scaaaary
-File: Alarm_0.gml
-Modified: 2025-09-09
-
-// Inherit the parent event
-event_inherited();
-
-
-
----
-
-Folder: objects\scaaaary
-File: Alarm_1.gml
-Modified: 2025-09-09
-
-// Inherit the parent event
-event_inherited();
-
-
-
----
-
-Folder: objects\scaaaary
-File: Collision_obj_attack.gml
-Modified: 2025-09-09
-
-// Inherit the parent event
-event_inherited();
-
-
-
----
-
-Folder: objects\scaaaary
+Folder: objects\obj_wall
 File: Create_0.gml
-Modified: 2025-09-09
+Modified: 2025-09-23
 
 // Inherit the parent event
 event_inherited();
@@ -473,20 +740,89 @@ event_inherited();
 
 ---
 
-Folder: objects\scaaaary
+Folder: objects\obj_wall
 File: Step_0.gml
-Modified: 2025-09-09
+Modified: 2025-09-24
 
-// Inherit the parent event
-event_inherited();
+// block NPC logic while a dialogue is open
+if (instance_exists(obj_dialogue)) {
+    can_talk = false;
+    exit;
+}
 
+// check if player is close enough
+if (distance_to_object(obj_player) < 32) { // use 32px instead of 8 if you want more range
+    can_talk = true;
+
+    // start dialogue when key is pressed
+    if (keyboard_check_pressed(input_key)) {
+        if (global.swordType = "Lightning"){
+            create_dialogue(dialogue1);
+            instance_destroy();
+        }
+        else {
+            create_dialogue(dialogue);
+        }
+}
+else {
+    can_talk = false;
+}
+
+}
+
+---
+
+Folder: objects\projectile_parent
+File: Alarm_0.gml
+Modified: 2025-09-24
+
+if (alarm[0] = 0) {
+    instance_destroy();
+}
+
+---
+
+Folder: objects\projectile_parent
+File: Create_0.gml
+Modified: 2025-09-24
+
+lastPositionx = obj_player.x;
+lastPositiony = obj_player.y;  
+damage = 1; 
+
+
+checked = false;
+
+speedDD = speed;
+
+---
+
+Folder: objects\projectile_parent
+File: Step_0.gml
+Modified: 2025-09-24
+
+if (checked == false) {
+    checked = true;
+    
+    move_towards_point (lastPositionx, lastPositiony, speedDD)
+    alarm[0] = 360;
+}
+
+
+---
+
+Folder: objects\Room2_Portal
+File: Collision_obj_player.gml
+Modified: 2025-10-03
+
+room_goto(Room2);
 
 
 ---
 
 Folder: scripts\Dialogue
 File: Dialogue.gml
-Modified: 2025-09-12
+Modified: 2025-09-23
 
 function create_dialogue(_messages){
     if (instance_exists(obj_dialogue)) return;
@@ -498,26 +834,39 @@ function create_dialogue(_messages){
 
 global.char_colors = {
     "Jonesy": c_dkgray,
-    "Impostor": c_red,
-    "test dialogue": c_white 
+    "Jonathan Gabriel Lopez": c_red,
+    "test dialogue": c_white, 
 };
 
 welcome_dialogue = [
 {
     name: "Jonesy",
-    msg: "Fortnite time"
+    msg: "Don't go into this castle"
 },
 {
-    name: "Impostor",
-    msg: "There's am impostor among us"
+    name: "Jonathan Gabriel Lopez",
+    msg: "why not"
 },
 {
     name: "Jonesy",
-    msg: "where we dropping boys"
+    msg: "there are scary enemies and a scary dude at the end"
 },
 {
-    name: "Impostor",
-    msg: "red sus"
+    name: "Jonathan Gabriel Lopez",
+    msg: "good thing that my name is Jonathan Gabriel Lopez"
+}
+]
+
+unlock_dialogue = [
+{
+    name: "???",
+    msg: "You are not ready. Find the treasures of this dungeon, then you may proceed..."
+}
+]
+
+unlocked_dialogue = [{
+    name: "???",
+    msg:"You are now strong enough. Proceed"
 }
 ]
 
