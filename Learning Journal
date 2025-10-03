@@ -20,3 +20,9 @@ Week of Sep. 15-19 - Throughout the week I worked on designing pickups for the c
 9/24/25 - I coded a projectile, however faced errors as the projectile would not go in the direction I wanted it to go. Spent the rest of the time debugging.
 9/25/25 - Worked with Jonathan and Jacob to come up with a way to use switch cases in order to solve the issue
 9/26/25 - Finished projectile system and now began work on it's speed and damage upon enemy collision.
+
+9/29/25 - Began implementing projectile into game, coding how the projectile would damage the enemy upon collision
+9/30/25 - Added the laser gun as an item that, upon pickup by the player, allows them to use the projectile
+10/1/25 - Added a sprite for the laser gun and added a boss room
+10/2/25 - Began adding sprites for the final boss
+10/3/25 - Finished adding sprite for the boss
