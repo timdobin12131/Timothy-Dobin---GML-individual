@@ -26,3 +26,6 @@ Week of Sep. 15-19 - Throughout the week I worked on designing pickups for the c
 10/1/25 - Added a sprite for the laser gun and added a boss room
 10/2/25 - Began adding sprites for the final boss
 10/3/25 - Finished adding sprite for the boss
+10/13/25 - Began work on coding boss, I am facing a challenge with the projectile system.
+10/14/25 - Still struggling to add a 360 spread projectile.
+10/15/25 - Overcame the issue using AI, and began work on improving the move
