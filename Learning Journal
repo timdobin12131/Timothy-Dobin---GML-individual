@@ -29,3 +29,8 @@ Week of Sep. 15-19 - Throughout the week I worked on designing pickups for the c
 10/13/25 - Began work on coding boss, I am facing a challenge with the projectile system.
 10/14/25 - Still struggling to add a 360 spread projectile.
 10/15/25 - Overcame the issue using AI, and began work on improving the move
+10/20/25 - Finishes the 360 burst projectile and began the next move.
+10/21/25 - Created a rotating bullet pattern.
+10/22/25 - Created a projectile wave that is destroyable by the player's attack.
+10/23/25 - Created quadrants for the boss fight and began movement.
+10/24/25 - Continued work on boss movement between quadrants.
