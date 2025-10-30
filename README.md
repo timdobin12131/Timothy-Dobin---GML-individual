@@ -13,3 +13,5 @@ First Boss Move: https://drive.google.com/file/d/1bqttPV8yO1HvwZKOv1yMp4FRjCFSbY
 Current Boss Moveset: https://drive.google.com/file/d/1dZVmHkASYeGOKRh6CRuQpsFZ09LD8A0W/view?usp=sharing
 
 Boss Movement Between Quadrants: https://drive.google.com/file/d/1B-l0Sgtcpdu-uPzTL9CTJsm9DeQMrYjt/view?usp=sharing
+
+Moves + Movement: https://drive.google.com/file/d/1i420zd0KWvdrZi_KC6LwVjgZoSYq8JDo/view?usp=sharing
