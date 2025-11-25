@@ -15,3 +15,5 @@ Current Boss Moveset: https://drive.google.com/file/d/1dZVmHkASYeGOKRh6CRuQpsFZ0
 Boss Movement Between Quadrants: https://drive.google.com/file/d/1B-l0Sgtcpdu-uPzTL9CTJsm9DeQMrYjt/view?usp=sharing
 
 Moves + Movement: https://drive.google.com/file/d/1i420zd0KWvdrZi_KC6LwVjgZoSYq8JDo/view?usp=sharing
+
+Dash Move: https://drive.google.com/file/d/1dAKAZcyDDkku-GKweVA2hR0ibJc8i0uz/view?usp=sharing
