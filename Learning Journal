@@ -55,3 +55,11 @@ Week of Sep. 15-19 - Throughout the week I worked on designing pickups for the c
 11/20/25 - Returned to work on boss, facing bug where dash doesn't move past player coordinates
 11/21/25 - Worked to resolve bug and was successful.
 1/28/26 - Began applying code from tutorials as well as code I knew before to start the movement of the next boss
+2/3/26 - Added sprites for boss into game.
+2/4/26 - Worked further on movement of boss
+2/5/26 - Looked at code from previous boss to see how I did the combat.
+2/6/26 - Examined different possible attack patterns for the boss.
+2/10/26 - Looked at tutorials and boss making strategies.
+2/12/26 - Began experimenting with how the boss could attack the player using AI.
+
+
