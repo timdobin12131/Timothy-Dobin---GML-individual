@@ -17,3 +17,6 @@ Boss Movement Between Quadrants: https://drive.google.com/file/d/1B-l0Sgtcpdu-uP
 Moves + Movement: https://drive.google.com/file/d/1i420zd0KWvdrZi_KC6LwVjgZoSYq8JDo/view?usp=sharing
 
 Dash Move: https://drive.google.com/file/d/1dAKAZcyDDkku-GKweVA2hR0ibJc8i0uz/view?usp=sharing
+
+What currently exists: Boss sprites, movement code
+Currently working on: Finishing movement and making attacks.
