@@ -1,0 +1,147 @@
+//CREATE
+//-----------------------------------------------
+hp = 50;
+state = "IDLE";
+state_timer = 60; // Starts with a 1-second pause
+
+// Attack variables
+attack_count = 0;
+spiral_angle = 0;
+
+// Dash variables
+dash_dir = 0;
+dash_speed = 7;
+dash_duration = 0;
+
+tilemap = layer_tilemap_get_id("Tiles_Col");
+
+
+//STEP
+//-------------------------------------------------
+// Safety check: Don't run code if the player is dead/missing
+if (!instance_exists(obj_player)) exit;
+
+switch (state) {
+    
+    case "IDLE":
+        image_blend = c_white; // Reset color
+        state_timer--;
+        
+        if (state_timer <= 0) {
+            // Randomly select the next attack
+            var _attack = choose("SPREAD", "SPIRAL", "DASH_PREP");
+            state = _attack;
+            
+            // Setup variables based on the chosen attack
+            if (_attack == "SPREAD") { state_timer = 15; attack_count = 3; }
+            if (_attack == "SPIRAL") { state_timer = 4; attack_count = 24; spiral_angle = 0; }
+            if (_attack == "DASH_PREP") { state_timer = 45; } // 45 frames of warning before dashing!
+        }
+        break;
+
+    case "SPREAD":
+        state_timer--;
+        if (state_timer <= 0) {
+            var _dir = point_direction(x, y, obj_player.x, obj_player.y);
+            
+            // Shoot 5 projectiles in a fan shape
+            for (var i = -2; i <= 2; i++) {
+                var _proj = instance_create_depth(x, y, depth, obj_boss_bullet);
+                _proj.direction = _dir + (i * 15); // Spread them 15 degrees apart
+                _proj.image_angle = _proj.direction;
+            }
+            
+            attack_count--;
+            state_timer = 35; // Pause between bursts
+            
+            if (attack_count <= 0) {
+                state = "IDLE";
+                state_timer = 60; // Cooldown before next attack phase
+            }
+        }
+        break;
+
+    case "SPIRAL":
+        state_timer--;
+        if (state_timer <= 0) {
+            var _proj = instance_create_depth(x, y, depth, obj_boss_bullet);
+            _proj.direction = spiral_angle;
+            _proj.image_angle = _proj.direction;
+            
+            spiral_angle += 15; // Rotate next bullet by 15 degrees
+            attack_count--;
+            state_timer = 4; // Shoot very rapidly
+            
+            if (attack_count <= 0) {
+                state = "IDLE";
+                state_timer = 60;
+            }
+        }
+        break;
+
+    case "DASH_PREP":
+        // Telegraphing: Turn red and stop moving to warn the player
+        image_blend = c_red; 
+        state_timer--;
+        
+        if (state_timer <= 0) {
+            state = "DASH";
+            // Lock onto where the player is right at this moment
+            dash_dir = point_direction(x, y, obj_player.x, obj_player.y);
+            dash_duration = 90; // Fallback timer in case he dashes into open space
+        }
+        break;
+
+    case "DASH":
+        dash_duration--;
+        var _hspd = lengthdir_x(dash_speed, dash_dir);
+        var _vspd = lengthdir_y(dash_speed, dash_dir);
+        
+        // 1. Check Collision with Player
+        if (place_meeting(x + _hspd, y + _vspd, obj_player)) {
+            // Hit the player!
+            if (!obj_player.invincible) {
+                obj_player.hp -= 2; // Dash does 2 damage
+                obj_player.invincible = true;
+                obj_player.alarm[0] = 60; 
+                
+                // Knockback the player using their own collision logic so they don't get stuck in walls
+                with (obj_player) {
+                    move_and_collide(_hspd * 4, _vspd * 4, [tilemap, obj_wall]); 
+                }
+            }
+            
+            // Stop dashing and return to idle
+            state = "IDLE";
+            state_timer = 60;
+            break; 
+        }
+        
+        // 2. Check Collision with Walls/Tilemap
+        var _hit_wall = place_meeting(x + _hspd, y, obj_wall) || place_meeting(x, y + _vspd, obj_wall) || 
+                        place_meeting(x + _hspd, y, tilemap) || place_meeting(x, y + _vspd, tilemap);
+                        
+        if (_hit_wall) {
+            // Missed player, hit wall -> 360 burst!
+            for (var i = 0; i < 360; i += 20) { // Spawns 18 bullets in a circle
+                var _proj = instance_create_depth(x, y, depth, obj_boss_bullet);
+                _proj.direction = i;
+                _proj.image_angle = i;
+            }
+            
+            state = "IDLE";
+            state_timer = 90; // Longer recovery so the player can dodge the massive burst
+            break;
+        }
+        
+        // 3. Move the boss if no collisions occurred
+        x += _hspd;
+        y += _vspd;
+        
+        // 4. Fallback: If boss dashes endlessly into open space
+        if (dash_duration <= 0) {
+            state = "IDLE";
+            state_timer = 60;
+        }
+        break;
+}
