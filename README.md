@@ -18,5 +18,7 @@ Moves + Movement: https://drive.google.com/file/d/1i420zd0KWvdrZi_KC6LwVjgZoSYq8
 
 Dash Move: https://drive.google.com/file/d/1dAKAZcyDDkku-GKweVA2hR0ibJc8i0uz/view?usp=sharing
 
+BOSS AS OF 4/21/26: https://drive.google.com/file/d/1y7J45CCgxlkZgtbG_iIYlqOJxzcV2QZS/view?usp=sharing
+
 What currently exists: Boss sprites, movement code
 Currently working on: Finishing movement and making attacks.
