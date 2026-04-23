@@ -20,5 +20,7 @@ Dash Move: https://drive.google.com/file/d/1dAKAZcyDDkku-GKweVA2hR0ibJc8i0uz/vie
 
 BOSS AS OF 4/21/26: https://drive.google.com/file/d/1y7J45CCgxlkZgtbG_iIYlqOJxzcV2QZS/view?usp=sharing
 
+Player Projectile Demo: https://drive.google.com/file/d/1sc_hE95saZaQ0bTq6RLhHp1mgHO0SXmQ/view?usp=sharing
+
 What currently exists: Boss sprites, movement code
 Currently working on: Finishing movement and making attacks.
